@@ -30,5 +30,24 @@ Like a grep.
 
 7. Night mode, red letters using bolds and backgrounds
 
+8. Learn screen to enable paging
 
+9. Raspberry pi becomes wifi AP, boat name
+
+10. Pi has music output, w SD card of mp3
+
+11. Any device can log into pi via ssh, and run seatop by typing s <tab>
+
+12. Post depths to public anonymized server
+
+
+===
+
+Link to ANSI escape code coloring
+http://stackoverflow.com/questions/15682537/ansi-color-specific-rgb-sequence-bash
+
+Night vision red = echo -e "\033[38;5;208mpeach\033[0;00m"
+
+
+Link to pi MP3 player
 
