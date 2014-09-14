@@ -1,0 +1,19 @@
+{
+  "President": "Alan Isaac",
+  "CEO": "David Richardson",
+  "India": [
+    "Sachin Tendulkar",
+    "Virender Sehwag",
+    "Gautam Gambhir"
+  ],
+  "Srilanka": [
+    "Lasith Malinga",
+    "Angelo Mathews",
+    "Kumar Sangakkara"
+  ],
+  "England": [
+    "Alastair Cook",
+    "Jonathan Trott",
+    "Kevin Pietersen"
+  ]
+}
