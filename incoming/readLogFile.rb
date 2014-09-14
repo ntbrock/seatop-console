@@ -27,7 +27,7 @@ CSV.foreach(ARGV[0]) do |line|
 
 end
 
-
+drawSent()
 
 def drawSent
   @sent.keys.each do |k|
