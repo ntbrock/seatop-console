@@ -1,0 +1,9 @@
+<html><head><title>Modem Status</title> 
+<style type="text/css">div.output{margin:2px 2px 2px 4px;padding:0 0 0 0}body{margin:0;padding:0}table,td{padding:2px;margin:0;font:normal 9pt/9pt 'Courier New',Courier,serif}</style></head><body lang="en"> <div class=output>
+<div class=output> <table> <tbody> <tr>
+<td nowrap>MDN:</td> <td nowrap>+19198960902</td></tr><tr> <td nowrap>ESN (hex):</td> <td nowrap>8097ca73</td></tr> <tr> <td nowrap>Channel:</td>
+<td nowrap>0</td></tr> <tr> <td nowrap>P_REV Indicator:</td> <td nowrap>0</td></tr> <tr> <td nowrap>PRL ID:</td>
+<td nowrap>15319</td></tr> <tr> <td nowrap>Band Class Type:</td> <td nowrap>13</td></tr> <tr> <td nowrap>ERI Version:</td>
+<td nowrap>5</td></tr> <tr> <td nowrap>Dormancy:</td> <td nowrap>FALSE</td></tr> <tr> <td nowrap>Signal - EVDO:</td>
+<td nowrap>0</td></tr> <tr> <td nowrap>Signal - LTE:</td> <td nowrap>90</td></tr> <tr> <td nowrap>Battery Level:</td>
+<td nowrap>98</td></tr> <tr> <td nowrap>Battery Charging:</td> <td nowrap>1</td></tr> </tbody> </table></div></body></html>

@@ -1,0 +1,350 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Pragma" content="no-cache">
+<link rel="stylesheet" type="text/css" href="../style.css">
+<TITLE>Samsung SCH-LC11 Admin Page</TITLE>
+<script type="text/javascript">
+<!--
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+</head>
+
+<SCRIPT language=JavaScript type="text/javascript" src="lib019.js"></SCRIPT>
+<SCRIPT language=JavaScript type="text/javascript" src="msg019.js"></SCRIPT>
+<!-- uppers are common codes for all html pages -->
+
+<SCRIPT language=javascript type=text/javascript>
+var AdDefault="0";
+var AdInterface="1";
+var AdMessage="";
+var ApEnable="1";
+var WwActivated="1";
+var WwConnStatus="2";
+var SyStRefresh="3000";
+var currentLang="en";
+var helpfilevar="hlp_home.html";
+var checkboxCGI=[];
+var checkboxform=[];
+var radioCGI=[];
+var radioform=[];
+var selectCGI=["WiCurrPf"];
+var selectform=["NP_WiCurrPf"];
+var actionPost="0";
+
+function init(){
+	var cf=self.document.forms[0];
+	WwConnStatus = cf.elements["hd_WWConnection"].value;
+	setButton(WwConnStatus);
+
+/*
+	if(WwConnStatus=="4")   // please remove after CGI completed
+		alert(msg_activate_via_usb);
+*/
+}
+
+
+function setButton(connStatus){	var cf=self.document.forms[0];
+	var cb=cf.elements["connectDisconnect"];
+	if(connStatus=="2"||connStatus=="7"){
+		//cb.value=text_disconnect;
+		cb.value="Disconnect";
+		cb.disabled=false;
+	}
+	else if(connStatus=="4"){
+		//cb.value=text_connect;
+		cb.value="Connect";
+		cb.disabled=false;
+	}
+	else{cb.disabled=true;
+	}
+}
+
+function checkForm(cf){
+	var cf=self.document.forms[0];
+	var msg="";
+	return showerr(msg);
+}
+
+var dmode=false;
+
+function disclaim(){dmode=(dmode)?false:true;
+setDisplay(self,"d2",dmode);
+setDisplay(self,"d3",dmode);
+}
+function setWan()
+{
+	var cf=self.document.forms[0];
+	var cb=cf.elements["connectDisconnect"];
+	if(actionPost == "0")
+	{
+		if(cb.value=="Connect")
+		{
+			cf.elements["todo"].value="connect";
+			cf.submit();
+		} 
+		else if(cb.value=="Disconnect")
+		{
+			cf.elements["todo"].value="disconnect";
+			cf.submit();
+		}
+		actionPost = "1";
+	}
+}
+
+function dummyconnect() {
+	return;
+}
+	
+function setProfile(){
+	var cf=self.document.forms[0];
+	var profile=cf.elements["NP_WiCurrPf"].value;
+	
+	if(actionPost == "0")
+	{
+		if(profile==cf.elements["WiCurrPf"].value) {
+			alert(msg_profile_inuse);
+			return;
+		}
+	/*
+		var msg=(profile=="Open")?msg_change_profile_open:msg_change_profile_secure;
+		if(!confirm(msg))
+			return;
+	*/
+		if(profile == "Open") 
+		{
+			msg = msg_change_profile_open+"\n\n-SSID: "+cf.elements["WiOpenSSID"].value;
+		}
+		else if(profile == "Secure") 
+		{
+			if(1 == cf.elements["displaykey"].value)
+				msg = msg_change_profile_secure+"\n\n-SSID: "+cf.elements["WiSSID"].value+"\n-Password: "+cf.elements["WiKEY"].value+"\n-KeyIndex: "+(parseInt(cf.elements["WikeyIndex"].value)+1);
+			else
+			msg = msg_change_profile_secure+"\n\n-SSID: "+cf.elements["WiSSID"].value+"\n-Password: "+cf.elements["WiKEY"].value;
+		}
+		else
+		{
+				
+			msg = msg_change_profile_secure+"\n\n-SSID: "+cf.elements["TempWiSSID"].value+"\n-Password: "+cf.elements["TempWiKEY"].value;
+		}
+
+		if(!confirm(msg))
+			return;
+		
+		cf.elements["WiCurrPf"].value=cf.elements["NP_WiCurrPf"].value;
+		cf.elements["todo"].value="setprofile";
+		cf.submit();
+		actionPost = "1";
+	}
+}
+</SCRIPT>
+
+<BODY lang=en class=admin onload="init(); showMsg(AdMessage);MM_preloadImages('../img/btn_apply_f.gif')">
+<FORM onsubmit="return false" method=post action="home.cgi">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td  align="center" valign="middle" width="100%" height="60" background="../img/top_back.gif"><table width="710" border="0" cellpadding="0" cellspacing="0" background="../img/top_back.gif">
+      <tr>
+        <td width="113" align="center"><img src="../img/logo.gif" alt="" width="113" height="65" border="0" /></td>
+        <td width="35"><a href="../home.html" target="_parent"><img src="../img/home_f.gif" alt="" width="35" height="33" border="0" /></a></td>
+        <td width="81"><a href="../lan.html" target="_parent"><img src="../img/top_menu_02_lan.gif" alt="" width="81" height="33" border="0" /></a></td>
+        <td width="81"><a href="../password.html" target="_parent"><img src="../img/top_menu_03_security.gif" alt="" width="81" height="33" border="0" /></a></td>
+        <td width="122"><a href="../advanced.html" target="_parent"><img src="../img/top_menu_04_advanced.gif" alt="" width="122" height="33" border="0" /></a></td>
+        <td width="176" align="right"><table width="136" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="32"><img src="../img/top_rss_00.gif" alt="" width="32" height="15" id="ratImg" /></td>
+            <td width="19"><img src="../img/top_rss_00.gif" alt="" name="rssImg" width="19" height="15" id="rssImg" /></td>
+            <td width="10">&nbsp;</td>
+            <td width="15"><img src="../img/top_rss_00.gif" alt="" width="15" height="15" id="roamImg" /></td>
+            <td width="10">&nbsp;</td>
+            <td width="13"><img  src="../img/top_rss_00.gif" alt="" name="usersImg" width="13" height="19" id="usersImg" /></td>
+            <td width="10">&nbsp;</td>
+            <td width="27" align="center" valign="middle"><img src="../img/top_rss_00.gif" alt="" name="batteryImg" width="27" height="15" id="batteryImg" /></td>
+          </tr>
+        </table></td>
+        <td width="45" align="right"><a href="javascript:showHelp(helpfilevar);"><img src="../img/top_menu_help.gif" alt="" width="45" height="17"border="0" /></td>
+        <td width="57"><a href="javascript:logout();" target="_parent"><img src="../img/top_menu_logout.gif" alt="" width="57" height="17" border="0" /></a></td>
+      </tr>
+    </table></td>
+  </tr>
+    <td align="center" valign="middle" width="100%" height="70" background="../img/top_shadow.gif" ><table width="710" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="middle"><b><font color="#333333" size="+1" >Home</font></b></td>
+      </tr>
+    </table></td>
+  <tr>
+    <td align="center"><table width="710" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td colspan="8"><hr color="#666666" size="2">
+</td>
+      </tr>
+      <tr>
+        <td height="30" colspan="8" align="left" valign="middle"><b><font color="#333333" size="+1" >&nbsp;&nbsp;&nbsp;Internet Connection</font></b></td>
+      </tr>
+      <tr>
+        <td colspan="7"><hr></td>
+      </tr>
+      <tr>
+        <td height="25"width="15">&nbsp;</td>
+        <td width="200" align="left"><strong>Received : </strong></td>
+<td width="270" align="right"><SPAN id=sessionRx>5424986</SPAN></td><td width="20" align="right" >&nbsp;</td>
+<td width="200" align="left"><strong>IP Address:</strong></td>
+<td width="270" align="right"><SPAN id=wanIp>100.91.133.142</SPAN></td>
+		<td width="15" align="right">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="7"><hr></td>
+      </tr>
+      <tr>
+        <td height="25">&nbsp;</td>
+        <td align="left"><strong>Transmitted: </strong></td>
+<td align="right"><SPAN id=sessionTx>6112614</SPAN></td><td>&nbsp;</td>
+<td align="left"><strong>Mask: </strong></td>
+<td align="right"><SPAN id=wanMask>255.255.255.255</SPAN></td>
+		<td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="7"><hr></td>
+      </tr>
+      <tr>
+        <td height="25">&nbsp;</td>
+        <td align="left"><strong>Connected Time: </strong></td>
+<td align="right"><SPAN id=sessionTime>2473</SPAN></td><td>&nbsp;</td>
+<td align="left"><strong>Gateway: </strong></td>
+<td align="right"><SPAN id=wanGw>100.91.133.142</SPAN></td>
+<td >&nbsp;</td></tr><tr><td colspan="7"><hr></td></tr>
+<tr><td height="25">&nbsp;</td><td align="left"><a href="javascript:setWan();" ><img  src="../img/btn_disconnect_f.gif" alt="" width="110" height="22" border="0" id="connectDisconnect2" /></a></td>
+<INPUT value="Disconnect" type=hidden name="connectDisconnect">	<td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td align="left"><strong>DNS: </strong></td>
+<td align="right"><SPAN id=wanDNS>198.224.182.135</SPAN></td>		<td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="7"><hr></td>
+      </tr>
+      <tr>
+        <td height="30" colspan="7">&nbsp;</td>
+      </tr>
+      </table>
+      <table width="710" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td colspan="8"><hr color="#666666" size="2">
+		</td>
+        </tr>
+        <tr>
+          <td height="30" colspan="7" align="left" valign="middle"><b><font color="#333333" size="+1" >&nbsp;&nbsp;&nbsp;WLAN</font></b></td>
+        </tr>
+        <tr>
+          <td colspan="7"><hr></td>
+        </tr>
+        <tr>
+          <td height="25"width="15">&nbsp;</td>
+          <td width="200" align="left"><strong>Profile: </strong></td>
+<td width="270" align="right">Secure</td>
+		<td width="20" align="right" >&nbsp;</td>
+          <td colspan="3" align="left"><table width="208" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="100"><SELECT size=1 name=NP_WiCurrPf style="width:130px">
+                                <OPTION selected value=Secure>Secure</OPTION>
+                                <OPTION value=Open>Open</OPTION>
+                                <OPTION value=SecureHotSpot>Secure Auto</OPTION>
+                        </SELECT></td>
+              <td width="15">&nbsp;</td>
+              <td width="63"><a href="javascript:setProfile()" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image16','','../img/btn_apply_f.gif',1)"><img src="../img/btn_apply.gif" alt="" name="Image16" width="63" height="22" border="0" id="Image16"  /></a></td>
+            </tr>
+          </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7"><hr></td>
+        </tr>
+        <tr>
+          <td height="25">&nbsp;</td>
+          <td align="left"><strong>Network Name: </strong></td>
+<td align="right">B SCH-LC11 7bfe Secure</td><td>&nbsp;</td>
+<td width="200" align="left"><strong>IP Address: </strong></td>
+<td width="270" align="right">192.168.1.1</td>
+		<td width="15">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="7"><hr></td>
+        </tr>
+        <tr>
+          <td height="25">&nbsp;</td>
+          <td align="left"><strong>Security:</strong></td>
+<td align="right">WPA-TKIP</td>
+<td>&nbsp;</td><td align="left"><strong>Mask: </strong></td>
+<td align="right">255.255.255.0</td><td >&nbsp;</td></tr><tr>
+<td colspan="7"><hr></td></tr><tr><td height="25">&nbsp;</td>
+<td align="left"><strong>Users:</strong></td>
+<td align="right"><SPAN id=clconn>1</SPAN> / 5</td>			<td>&nbsp;</td>
+          <td align="left">&nbsp;</td>
+          <td align="right">&nbsp;</td>
+          <td >&nb100 14254  100 14232  100    22   461k    729 --:--:-- --:--:-- --:--:--  463k
+sp;</td>
+        </tr>
+        <tr>
+          <td colspan="7"><hr></td>
+        </tr>
+        <tr>
+          <td height="30" colspan="7">&nbsp;</td>
+        </tr>
+      </table>
+      <table width="710" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><hr color="#666666" size="2">
+</td>
+        </tr>
+        <tr align="center">
+          <td><table width="710" cellpadding="7" cellspacing="7">
+            <tr align="left">
+              <td><p><strong>Please note: </strong>The &quot;bytes sent&quot; and &quot;bytes received&quot; as seen on this SCH-LC11 Admin page are not representative of actual billable data usage when data is transmitted or received on the Verizon Wireless Network. </p>
+              </tr>
+          </table></td>
+        </tr>
+        <tr>
+          <td><hr></td>
+        </tr>
+      </table>
+      <table width="710" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td height="40" align="right" valign="bottom"><img src="../img/samsung.gif" alt="" width="72" height="27" /><br /></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+
+<!-- TODO CMD and Common  -->
+<INPUT type=hidden name=todo>
+<INPUT value=Secure type=hidden name=WiCurrPf><INPUT type=hidden name=31GRZ2BJ4JDU60Q5PRMC6MTNI3V6CIB92ZKGZO5WQ7XJ7BPW6G2Q26SWH9SA5VM0 value="E8HVWH9D17CD1YR86M3WE466WP520STT5N5R6YO0Y8IVM3REKGZ9YUMBU0G3RK26">
+<INPUT value="Verizon SCH-LC11 7bfe" type=hidden name=WiOpenSSID><INPUT value="B SCH-LC11 7bfe Secure" type=hidden name=WiSSID><INPUT value="Verizon SCH-LC11 9a7e" type=hidden name=TempWiSSID>
+<INPUT value="onetwo3four" type=hidden name=WiKEY><INPUT value="41cb2" type=hidden name=TempWiKEY>
+<INPUT value=0 type=hidden name=WikeyIndex><INPUT value=0 type=hidden name=displaykey><INPUT value=2 type=hidden name=hd_WWConnection></FORM>
+<SCRIPT type=text/javascript>setTimeout("updateNetworkInfo()",sleep_time);</SCRIPT></body></html>
