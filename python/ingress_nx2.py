@@ -76,8 +76,19 @@ for lineRaw in readf:
         csv_row = row
 
         # Dynmically build the parameter list. , p0s, p0f,  csv_row[1], float(csv_row[1])    
+        paramNames = ""
+        paramValues = ""
+        for x in range(1, len(csv_row)):
+          paramValues += "'%s'," % csv_row[x]
+          paramNames += "p%ds," % x
+          # does it blend?
+          try:
+            paramValues += "%f," % float(csv_row[x])
+            paramNames += "p%df," % x
+          except ValueError:
+            1 # supress exception
 
-        print "INSERT INTO nmeas ( last_gps_on, last_gps, last_lat, last_lon, noun, sentence ) values ( '%s', point(%f,%f), %f, %f, '%s', '%s' );\n" % ( last_on, point.latitude, point.longitude, point.latitude, point.longitude, csv_row[0], line )
+        print "INSERT INTO nmeas ( last_gps_on, last_gps, last_lat, last_lon, sentence, %s noun ) values ( '%s', point(%f,%f), %f, %f, '%s', %s '%s' );\n" % ( paramNames, last_on, point.latitude, point.longitude, point.latitude, point.longitude, line, paramValues,csv_row[0] )
 
 
 
