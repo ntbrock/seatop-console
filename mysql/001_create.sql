@@ -20,6 +20,7 @@ create table nmeas (
        last_lat		decimal(10,8)	null, -- Stored in decimal format for everyone else 
        last_lon		decimal(11,8)	null,
        sentence		varchar(255)	null,
+       parsed		varchar(511)	null,
        noun		varchar(15)	not null,
        p0s		varchar(15)	null,
        p0f		float	null,
