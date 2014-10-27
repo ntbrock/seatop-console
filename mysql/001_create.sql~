@@ -1,0 +1,8 @@
+
+
+drop table evolutions;
+create table evolutions (
+       id    integer	primary key auto_increment,
+       filename	varchar(255)	not null unique,
+       created_on	datetime    not null
+);

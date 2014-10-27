@@ -1,0 +1,40 @@
+http://raspberrypi.stackexchange.com/questions/13930/capturing-serial-number-of-2-usb-rfid-reader-in-python-pi2-rfid-mifire-rfid
+
+
+import serial
+ser = serial.Serial('/dev/tty.usbmodem1411', 9600) # here you have to write your port. If you dont know how to find it just write ls -l /dev/tty.* in your terminal (i'm using mac)
+
+while True:
+    try:
+        response = ser.readline()
+        print response
+    except KeyboardInterrupt:
+        break
+
+ser.close()
+
+
+
+import sys
+
+print 'Number of arguments:', len(sys.argv), 'arguments.'
+print 'Argument List:', str(sys.argv)
+
+
+@reboot sh /home/pi/bbt/launcher.sh >/home/pi/logs/cronlog 2>&1
+
+
+ temperature = float(input('What is the temperature? '))
+    if temperature > 70:
+        print('Wear shorts.')
+    else:
+        print('Wear long pants.')
+    print('Get some exercise outside.')
+
+
+    sys.exit([arg])
+
+
+
+    .rstrip()
+    
