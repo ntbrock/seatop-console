@@ -1,0 +1,69 @@
+reboot.sh run at  Thu Oct  2 15:44:38 EDT 2014
+Traceback (most recent call last):
+  File "/home/pi/seatop-python/cat_nmea_usb.py", line 21, in <module>
+    ser = serial.Serial(port=port, baudrate=baud, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=timeout)
+  File "/usr/lib/python2.7/dist-packages/serial/serialutil.py", line 260, in __init__
+Traceback (most recent call last):
+  File "/home/pi/seatop-python/cat_nmea_usb.py", line 21, in <module>
+    ser = serial.Serial(port=port, baudrate=baud, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=timeout)
+  File "/usr/lib/python2.7/dist-packages/serial/serialutil.py", line 260, in __init__
+Traceback (most recent call last):
+  File "/home/pi/seatop-python/cat_nmea_usb.py", line 21, in <module>
+    ser = serial.Serial(port=port, baudrate=baud, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=timeout)
+  File "/usr/lib/python2.7/dist-packages/serial/serialutil.py", line 260, in __init__
+    self.open()
+  File "/usr/lib/python2.7/dist-packages/serial/serialposix.py", line 276, in open
+    self.open()
+  File "/usr/lib/python2.7/dist-packages/serial/serialposix.py", line 276, in open
+    raise SerialException("could not open port %s: %s" % (self._port, msg))
+        raise SerialException("could not open port %s: %s" % (self._port, msg))
+serial.serialutil.SerialException: could not open port /dev/ttyUSB3: [Errno 2] No such file or directory: '/dev/ttyUSB3'
+self.open()
+  File "/usr/lib/python2.7/dist-packages/serial/serialposix.py", line 276, in open
+    raise SerialException("could not open port %s: %s" % (self._port, msg))
+serial.serialutil.SerialException: could not open port /dev/ttyUSB2: [Errno 2] No such file or directory: '/dev/ttyUSB2'
+serial.serialutil.SerialException: could not open port /dev/ttyUSB1: [Errno 2] No such file or directory: '/dev/ttyUSB1'
+reboot.sh run at  Thu Oct  2 15:44:57 EDT 2014
+Traceback (most recent call last):
+  File "/home/pi/seatop-python/cat_nmea_usb.py", line 21, in <module>
+    ser = serial.Serial(port=port, baudrate=baud, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=timeout)
+  File "/usr/lib/python2.7/dist-packages/serial/serialutil.py", line 260, in __init__
+    self.open()
+  File "/usr/lib/python2.7/dist-packages/serial/serialposix.py", line 276, in open
+    raise SerialException("could not open port %s: %s" % (self._port, msg))
+serial.serialutil.SerialException: could not open port /dev/ttyUSB1: [Errno 2] No such file or directory: '/dev/ttyUSB1'
+reboot.sh run at  Thu Oct  2 15:44:57 EDT 2014
+reboot.sh run at  Sat Oct  4 00:17:47 EDT 2014
+Traceback (most recent call last):
+  File "/home/pi/seatop-python/cat_nmea_usb.py", line 21, in <module>
+    ser = serial.Serial(port=port, baudrate=baud, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=timeout)
+  File "/usr/lib/python2.7/dist-packages/serial/serialutil.py", line 260, in __init__
+Traceback (most recent call last):
+  File "/home/pi/seatop-python/cat_nmea_usb.py", line 21, in <module>
+    ser = serial.Serial(port=port, baudrate=baud, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=timeout)
+  File "/usr/lib/python2.7/dist-packages/serial/serialutil.py", line 260, in __init__
+    self.open()
+  File "/usr/lib/python2.7/dist-packages/serial/serialposix.py", line 276, in open
+    self.open()
+  File "/usr/lib/python2.7/dist-packages/serial/serialposix.py", line 276, in open
+    raise SerialException("could not open port %s: %s" % (self._port, msg))
+serial.serialutil.SerialException:     raise SerialException("could not open port %s: %s" % (self._port, msg))
+serial.serialutil.SerialException: could not open port /dev/ttyUSB1: [Errno 2] No such file or directory: '/dev/ttyUSB1'
+could not open port /dev/ttyUSB0: [Errno 2] No such file or directory: '/dev/ttyUSB0'
+reboot.sh run at  Sat Oct  4 00:17:44 EDT 2014
+Traceback (most recent call last):
+  File "/home/pi/seatop-python/cat_nmea_usb.py", line 21, in <module>
+    ser = serial.Serial(port=port, baudrate=baud, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=timeout)
+  File "/usr/lib/python2.7/dist-packages/serial/serialutil.py", line 260, in __init__
+Traceback (most recent call last):
+  File "/home/pi/seatop-python/cat_nmea_usb.py", line 21, in <module>
+    ser = serial.Serial(port=port, baudrate=baud, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=timeout)
+  File "/usr/lib/python2.7/dist-packages/serial/serialutil.py", line 260, in __init__
+    self.open()
+  File "/usr/lib/python2.7/dist-packages/serial/serialposix.py", line 276, in open
+    self.open()
+  File "/usr/lib/python2.7/dist-packages/serial/serialposix.py", line 276, in open
+    raise SerialException("could not open port %s: %s" % (self._port, msg))
+serial.serialutil.SerialException: could not open port /dev/ttyUSB0: [Errno 2] No such file or directory: '/dev/ttyUSB0'
+    raise SerialException("could not open port %s: %s" % (self._port, msg))
+serial.serialutil.SerialException: could not open port /dev/ttyUSB1: [Errno 2] No such file or directory: '/dev/ttyUSB1'
