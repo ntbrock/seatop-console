@@ -1,4 +1,0 @@
-
-# Start the reboot.sh!
-@reboot sh /home/pi/seatop-python/reboot.sh >> /home/pi/seatop-python/cronlog 2>&1
-

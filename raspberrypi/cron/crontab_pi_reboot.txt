@@ -1,0 +1,4 @@
+# Install this as pi's cron to start the music on boot.
+
+# Start the reboot.sh!
+@reboot sh /home/pi/seatop-python/reboot.sh >> /home/pi/cronlog 2>&1

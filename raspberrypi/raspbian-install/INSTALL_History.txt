@@ -4,6 +4,19 @@ Because I love ubuntu
 sudo apt-get update 
 apt-get upgrade
 
+
+# A cool USB trick
+
+lsusb
+
+Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. 
+Bus 001 Device 004: ID 7392:7811 Edimax Technology Co., Ltd EW-7811Un 802.11n Wireless Adapter [Realtek RTL8188CUS]
+Bus 001 Device 005: ID 154b:007a PNY 
+Bus 001 Device 006: ID 067b:2303 Prolific Technology, Inc. PL2303 Serial Port
+
+
 # Install the Wlan server
 
 sudo apt-get install hostapd isc-dhcp-server
@@ -60,6 +73,4 @@ iptables-save > /etc/iptables.ipv4.nat
    49  ls
    50  emacs -nw config.txt 
 
-
- 95  cat TRICKS.txt 
 
