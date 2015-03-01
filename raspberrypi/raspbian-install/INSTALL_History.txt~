@@ -1,0 +1,22 @@
+ sudo apt-get update 
+   28  apt-get upgrade
+   29  sudo apt-get upgrade
+   30  clear
+   31  ls
+   32  ifconfig
+   33  sudo apt-get install hostapd isc-dhcp-server
+
+
+ 42  emacs -nw dhcpd.conf 
+   43  sudo emacs -nw dhcpd.conf 
+   44  sudo dpkg-reconfigure keyboard-configuration
+   45  '
+
+
+  48  cd /boot
+   49  ls
+   50  emacs -nw config.txt 
+
+
+ 95  cat TRICKS.txt 
+

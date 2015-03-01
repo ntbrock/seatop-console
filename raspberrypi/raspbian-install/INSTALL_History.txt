@@ -1,0 +1,65 @@
+2015-Mar-01 Raspberry Pi image based on Raspbian 7 
+Because I love ubuntu
+
+sudo apt-get update 
+apt-get upgrade
+
+# Install the Wlan server
+
+sudo apt-get install hostapd isc-dhcp-server
+
+# Custom HostAPD - become a Wifi server
+
+wget http://adafruit-download.s3.amazonaws.com/adafruit_hostapd_14128.zip
+mkdir install
+   51  cd install/
+   52  mv ../adafruit_hostapd_14128.zip .
+   53  unzip adafruit_hostapd_14128.zip 
+
+mv /usr/sbin/hostapd /usr/sbin/hostapd.ORIG
+mv hostapd /usr/sbin/
+
+chmod 755 /usr/sbin/hostapd
+/usr/sbin/hostapd /etc/hostapd/hostapd.conf
+   58  service dhcpd restart
+   59  service dhcp restart
+   60  service isc-dhcp-server restart
+   61  emacs -nw /etc/dhcp/dhcpd.conf
+   62  service isc-dhcp-server restart
+/usr/sbin/hostapd /etc/hostapd/hostapd.conf
+
+# /etc/
+
+ cd /etc/
+   27  emacs -nw sysctl.conf 
+   28  emacs -nw sysctl.conf 
+
+# Special - IP Forwarding
+
+echo 1 > /proc/sys/net/ipv4/ip_forward 
+emacs -nw sysctl.conf 
+iptables -t nat -S
+
+iptables -F
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+iptables -t nat -S
+iptables-save > /etc/iptables.ipv4.nat 
+
+
+
+
+ 42  emacs -nw dhcpd.conf 
+   43  sudo emacs -nw dhcpd.conf 
+   44  sudo dpkg-reconfigure keyboard-configuration
+   45  '
+
+
+  48  cd /boot
+   49  ls
+   50  emacs -nw config.txt 
+
+
+ 95  cat TRICKS.txt 
+
