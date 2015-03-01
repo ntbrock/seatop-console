@@ -6,8 +6,10 @@ import sys
 import csv
 import pynmea2
 from pprint import pprint
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, tzinfo
 from geopy.point import Point
+import pytz
+from tzlocal import get_localzone
 
 nmeaDict = {
     "XTE" : "Cross Track Error",
@@ -51,59 +53,75 @@ for lineRaw in readf:
 
   else: 
 
-    msg = pynmea2.parse(line)
-    print "Message: ", pprint(msg)
-    print "Sentence: ", msg.__class__.__name__
+    try:
 
-    datestamp = lastDatestamp
-    timestamp = lastTimestamp
+        msg = pynmea2.parse(line)
+        print "Message: ", pprint(msg)
+        print "Sentence: ", msg.__class__.__name__
 
-    # Nx2 doesn't produce date with its logs.
-    if hasattr(msg, 'datestamp'):
-      datestamp = msg.datestamp
-    if hasattr(msg, 'timestamp'):
-      timestamp = msg.timestamp
+        datestamp = lastDatestamp
+        timestamp = lastTimestamp
 
-    if datestamp and timestamp:
-      print "Last On:  ", datestamp, timestamp
-      last_on = datetime.combine(datestamp, timestamp)
-      print "Last On:  ", last_on
+        # Nx2 doesn't produce date with its logs.
+        if hasattr(msg, 'datestamp'):
+            datestamp = msg.datestamp
+        if hasattr(msg, 'timestamp'):
+            timestamp = msg.timestamp
 
-      ## ------ LAT and LON ------------
-      lat = lastLat
-      lon = lastLon
+        if datestamp and timestamp:
+            # print "Last On:  ", datestamp, "Timestamp: ", timestamp, " lastTimestamp", lastTimestamp
+            last_on = datetime.combine(datestamp, timestamp)
+            # print "Last On:  ", last_on
 
-      # Only some messages will override
-      if hasattr(msg, 'lat') and hasattr(msg, 'lat_dir'):
-        lat = (float(msg.lat[:2])+float(msg.lat[2:])/60) * (-1 if msg.lat_dir == 'S' else 1)
+            # handle the nx2 date rollover!
+            if ( lastTimestamp and timestamp ):
+                delta_seconds = datetime.combine(date.today(), lastTimestamp) - datetime.combine(date.today(), timestamp)   # ).total_seconds()
+                print "Check Date: ", datestamp  ,"  Timestamp: ", timestamp, " lastTimestamp", lastTimestamp, "  delta: ", delta_seconds,  "  delta_seconds: ", delta_seconds.total_seconds()
+                if ( delta_seconds and ( delta_seconds.total_seconds() < -100 or delta_seconds.total_seconds() > 100 )):
+                    # advance one day BOOK
+                    datestamp = datestamp + timedelta(days=1)
+                    lastTimestamp = timestamp
+                    print "DETECTED Avancing Date: ", datestamp  ,"  Timestamp: ", timestamp, " lastTimestamp", lastTimestamp, "  delta: ", delta_seconds,  "  delta_seconds: ", delta_seconds.total_seconds()
+            ## ------ LAT and LON ------------
+            lat = lastLat
+            lon = lastLon
 
-      if hasattr(msg, 'lon') and hasattr(msg, 'lon_dir'):
-        lon = (float(msg.lon[:3])+float(msg.lon[3:])/60) *(-1 if msg.lon_dir == 'W' else 1)
+            # Only some messages will override
+            if hasattr(msg, 'lat') and hasattr(msg, 'lat_dir'):
+                newLat = (float(msg.lat[:2])+float(msg.lat[2:])/60) * (-1 if msg.lat_dir == 'S' else 1)
+                if newLat:
+                    lat = newLat
 
-      print "Last Gps: ", lat, lon 
-      point = Point( lat, lon )
+            if hasattr(msg, 'lon') and hasattr(msg, 'lon_dir'):
+                newLon = (float(msg.lon[:3])+float(msg.lon[3:])/60) *(-1 if msg.lon_dir == 'W' else 1)
+                if newLon:
+                    lon = newLon
 
-      print "Last Point:  "
-      pprint(point)
+            print "Last Gps: ", lat, lon 
+            point = Point( lat, lon )
 
-      paramNames = ""
-      paramValues = ""
+            print "Last Point:  "
+            pprint(point)
+
+            paramNames = ""
+            paramValues = ""
 
 ## The dictionary method is awesome
 # <WCV(velocity='-7.17', vel_units='N', waypoint_id='046') data=['A']>
-      mD = msg.name_to_idx
-      for k in mD.keys():
-        v = msg.data[mD[k]]
 
-        if not k == "true" and not k == "timestamp":
-          if not v.rstrip() == "":
-            # does it blend?
-            try:
-              paramValues += "%f," % float(v)
-              paramNames += "%s," % k
-            except ValueError:
-              paramValues += '"%s",' % v
-              paramNames += "%s," % k
+            mD = msg.name_to_idx
+            for k in mD.keys():
+                v = msg.data[mD[k]]
+
+                if not k == "true" and not k == "timestamp":
+                    if not v.rstrip() == "":
+                        # does it blend?
+                        try:
+                            paramValues += "%f," % float(v)
+                            paramNames += "%s," % k
+                        except ValueError:
+                            paramValues += '"%s",' % v
+                            paramNames += "%s," % k
      
 ## The CSV row method is clunky, lets use the NMEA parser to its full power!
 #      csv_row = []
@@ -121,20 +139,25 @@ for lineRaw in readf:
 #          except ValueError:
 #            1 # supress exception
 
+            print "INSERT INTO nmeas ( last_gps_on, last_gps, last_lat, last_lon, nmea_sentence, %s noun, description ) values ( '%s', point(%f,%f), %f, %f, '%s', %s '%s', '%s' );\n" % ( paramNames, last_on, point.latitude, point.longitude, point.latitude, point.longitude, line, paramValues, msg.__class__.__name__, nmeaDict[msg.__class__.__name__] )
 
-      print "INSERT INTO nmeas ( last_gps_on, last_gps, last_lat, last_lon, nmea_sentence, %s noun, description ) values ( '%s', point(%f,%f), %f, %f, '%s', %s '%s', '%s' );\n" % ( paramNames, last_on, point.latitude, point.longitude, point.latitude, point.longitude, line, paramValues, msg.__class__.__name__, nmeaDict[msg.__class__.__name__] )
+            ## Store th values for the next loop
+            lastDatestamp = datestamp
+            lastTimestamp = timestamp
+            lastPoint = point
+            lastLat = lat
+            lastLon = lon
 
 
-      ## Store th values for the next loop
-      lastDatestamp = datestamp
-      lastTimestamp = timestamp
-      lastPoint = point
-      lastLat = lat
-      lastLon = lon
+    except ValueError:
+        print "Line is bad"
+    except IndexError:
+        print "Line is bad"
+
 
 readf.close()
 
-
+            
 #
 # ^o^
 #       |\    ship it!
