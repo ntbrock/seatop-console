@@ -1,0 +1,97 @@
+    1  cd /var/log/
+    2  ls
+    3  tail -f syslog 
+    4  bg
+    5  cd /boot/
+    6  ls
+    7  nano config.txt 
+    8  ls
+    9  exit
+   10  cd /etc/dhcp
+   11  ls
+   12  uptime
+   13  ls
+   14  emacs -nw dhcpd.conf
+   15  cd /etc/default/
+   16  emacs -nw isc-dhcp-server 
+   17  ifdown wlan0
+   18  cd ../network/
+   19  emacs -nw interfaces 
+   20  fg
+   21  emacs -nw interfaces 
+   22  ifconfig wlan0 192.168.42.1
+   23  emacs -nw /etc/hostapd/hostapd.conf
+   24  cd /etc/default/
+   25  emacs -nw hostapd 
+   26  cd /etc/
+   27  emacs -nw sysctl.conf 
+   28  emacs -nw sysctl.conf 
+   29  echo 1 > /proc/sys/net/ipv4/ip_forward 
+   30  emacs -nw sysctl.conf 
+   31  iptables -t nat -S
+   32  iptables -S
+   33  iptables-save > /etc/iptables.ipv4.nat
+   34  less /etc/iptables.ipv4.nat 
+   35  iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+   36  iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+   37  iptables -A FORWARD -i wlan0 -i eth0 -j ACCEPT
+   38  iptables -F
+   39  iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+   40  iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+   41  iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+   42  iptables -t nat -S
+   43  iptables-save > /etc/iptables.ipv4.nat 
+   44  cd /etc/network/
+   45  emacs -nw interfaces
+   46  ls
+   47  cd 
+   48  ls
+   49  wget http://adafruit-download.s3.amazonaws.com/adafruit_hostapd_14128.zip
+   50  mkdir install
+   51  cd install/
+   52  mv ../adafruit_hostapd_14128.zip .
+   53  unzip adafruit_hostapd_14128.zip 
+   54  mv /usr/sbin/hostapd /usr/sbin/hostapd.ORIG
+   55  mv hostapd /usr/sbin/
+   56  chmod 755 /usr/sbin/hostapd
+   57  /usr/sbin/hostapd /etc/hostapd/hostapd.conf
+   58  service dhcpd restart
+   59  service dhcp restart
+   60  service isc-dhcp-server restart
+   61  emacs -nw /etc/dhcp/dhcpd.conf
+   62  service isc-dhcp-server restart
+   63  /usr/sbin/hostapd /etc/hostapd/hostapd.conf
+   64  sudo service hostapd start
+   65  sudo service isc-dhcp-server start
+   66  sudo update-rc.d hostapd enable
+   67  sudo update-rc.d isc-dhcp-server enable
+   68  shutdown -r now
+   69  service isc-dhcp-server status
+   70  service isc-dhcp-server start'
+   71  service isc-dhcp-server start
+   72  ifconfig
+   73  ifup wlan0
+   74  cd /etc/network/
+   75  ls
+   76  emacs -nw interfaces
+   77  shutdown -r now
+   78  crontab -l
+   79  history |less
+   80  cd /opt/
+   81  ls
+   82  cd 
+   83  ls
+   84  cd install/
+   85  ls
+   86  cp adafruit_hostapd_14128.zip /tmp/
+   87  ls
+   88  cd
+   89  ls
+   90  cd /
+   91  find . |grep TRICK
+   92  less ./home/pi/incoming/seatop-console/incoming/TRICKS.txt
+   93  cd
+   94  ls
+   95  lsusb
+   96  cd /home/pi/seatop-console/raspberrypi/history
+   97  history > root_history

@@ -1,0 +1,390 @@
+    1  ls
+    2  ls -la
+    3  ifconfig
+    4  cd /etc/
+    5  ls
+    6  cd wpa_supplicant/
+    7  ls
+    8  cd ..
+    9  ls
+   10  ifconfig
+   11  ls
+   12  cd network/
+   13  ls
+   14  sudo emacs -nw interfaces 
+   15  sudo nano interfaces 
+   16  sudo iwlist wlan0 scan
+   17  cd /etc/wpa_supplicant/
+   18  sudo nano wpa_supplicant.conf 
+   19  clear
+   20  ls
+   21  ifconfig
+   22  ifup eth0
+   23  sudo ifup eth0
+   24  curl jonx.org/ip.php
+   25  #
+   26  ls
+   27  sudo apt-get update 
+   28  apt-get upgrade
+   29  sudo apt-get upgrade
+   30  clear
+   31  ls
+   32  ifconfig
+   33  sudo apt-get install hostapd isc-dhcp-server
+   34  apt-get install emacs
+   35  sudo apt-get install emacs
+   36  clear
+   37  ls
+   38  fg
+   39  ls
+   40  cd /etc/dhcp
+   41  ls
+   42  emacs -nw dhcpd.conf 
+   43  sudo emacs -nw dhcpd.conf 
+   44  sudo dpkg-reconfigure keyboard-configuration
+   45  '
+   46  echo 'hi'
+   47  ls
+   48  cd /boot
+   49  ls
+   50  emacs -nw config.txt 
+   51  sudo shutdown -r now
+   52  ls
+   53  cat /proc/cpuinfo 
+   54  sudo apt-get install nodejs
+   55  ls
+   56  sudo -i
+   57  ls
+   58  sudo -i
+   59  uptime
+   60  ifconfig
+   61  ping 192.168.42.1
+   62  sudo ifup wlan0
+   63  ping 192.168.42.1
+   64  ping 192.168.42.100
+   65  cd /etc/
+   66  ls
+   67  cd /etc/
+   68  ls
+   69  cd hostapd/
+   70  ls
+   71  cd ../dhcp
+   72  ls
+   73  emacs -nw dhcpd.conf
+   74  clear
+   75  ls
+   76  cd /etc/network/
+   77  ls
+   78  ifconfig
+   79  curl jonx.org/ip.php
+   80  sudo emacs -nw /etc/network/interfaces
+   81  fg
+   82  ping 192.168.42.1
+   83  ping 192.168.42.100
+   84  sudo shutdown -h now
+   85  ls
+   86  sudo su - brockman
+   87  ls
+   88  cd /home
+   89  ls
+   90  cd pi/
+   91  ls
+   92  cd incoming/
+   93  ls
+   94  crontab -l
+   95  cat TRICKS.txt 
+   96  lsusb 
+   97  ls
+   98  cat startSeatop
+   99  cat startSeatopGps.sh 
+  100  cd ..
+  101  ls
+  102  mkdir seatop-console
+  103  cd seatop-console/
+  104  cd inc
+  105  ls
+  106  ls -la
+  107  mv ~/incoming .
+  108  suls
+  109  sudo mv ~/incoming .
+  110  sudo chown -R pi.pi .
+  111  ls
+  112  cd incoming/
+  113  ls
+  114  cat startSeatopNx2.sh 
+  115  cat README.txt 
+  116  cd seatop-python/
+  117  ls
+  118  cat cronlog 
+  119  ls
+  120  cat cat_nmea_usb.py 
+  121  ./cat_nmea_usb.py 
+  122  ./cat_nmea_usb.py 0
+  123  ls
+  124  crontab -l
+  125  su -
+  126  sudo -i
+  127  cd
+  128  ls
+  129  ls -la
+  130  cat .bash_history 
+  131  ls
+  132  ls -la
+  133  cd
+  134  ls
+  135  cd seatop-console/
+  136  ls
+  137  cd incoming/
+  138  ls
+  139  cat INFO_temperature.txt 
+  140  ls
+  141  cat startSeatopGps.sh 
+  142  cat setDate.sh 
+  143  date
+  144  clear
+  145  ls
+  146  ifconfig
+  147  sudo ifconfig eth0 10.0.0.2 up
+  148  ping 10.0.0.1
+  149  route -n
+  150  sudo route add default dev eth0 gw 10.0.0.1
+  151  curl jonx.org/ip.php
+  152  ping 10.0.0.1
+  153  ssh brockman@10.0.0.1
+  154  sudo vi /etc/resolv.conf
+  155  uptime
+  156  ls
+  157  date
+  158  uptime
+  159  ls
+  160  cd seatop-console/
+  161  ls
+  162  cd incoming/
+  163  ls
+  164  ps fauxwww
+  165  ls
+  166  cat startSeatop
+  167  cat startSeatopGps.sh 
+  168  ./startSeatopGps.sh 
+  169  cd seatop-python/
+  170  ls
+  171  cat reboot.sh 
+  172  pwd
+  173  cd ..
+  174  ls
+  175  mv incoming/seatop-python .
+  176  cd seatop-python/
+  177  ls
+  178  cat reboot.sh 
+  179  ./reboot.sh 
+  180  ls
+  181  cd
+  182  ls
+  183  cd seatop-python/
+  184  ./reboot.sh 
+  185  jobs
+  186  ls -l /dev/ttyUSB0 
+  187  ls
+  188  date
+  189  man date
+  190  ls
+  191  ./set_unix_time_from_gps.py
+  192  ./set_unix_time_from_gps.py USBtty0
+  193  ./set_unix_time_from_gps.py 0
+  194  date
+  195  fg
+  196  ./set_unix_time_from_gps.py 0
+  197  echo 
+  198  echo $TZ
+  199  export TZ='America/New_York'
+  200  date
+  201  echo export TZ='America/New_York' >>' .bashrc
+  202  echo export TZ='America/New_York' >> .bashrc
+  203  datre
+  204  date
+  205  cat 
+  206  cat ~/.bashrc 
+  207  echo export TZ='America/New_York' >> .bashrc
+  208  exit
+  209  uptime
+  210  date
+  211  ls
+  212  cd seatop-python/
+  213  ls
+  214  ./set_unix_time_from_gps.py
+  215  ./set_unix_time_from_gps.py 0
+  216  ls
+  217  cd seatop-python/-
+  218  ls
+  219  emacs -nw HOWTO_GPS-DateSet.txt
+  220  man date
+  221  date
+  222  man date
+  223  ls
+  224  rm -rf python_games/
+  225  ls
+  226  cd seatop-
+  227  cd seatop-python/
+  228  ls
+  229  cd 2015-01-07/
+  230  ls
+  231  cd ..
+  232  ls
+  233  cd ..
+  234  ls
+  235  cd seatop-python/
+  236  cp ../seatop-console/seatop-python/* .
+  237  ls
+  238  cd ..
+  239  cd
+  240  ls
+  241  mkdir incoming
+  242  mv seatop-console/ incoming/
+  243  ls
+  244  ping jonx.org/ip.php
+  245  ls
+  246  cd seatop-python/
+  247  ls
+  248  cd 2015-01-07/
+  249  ls
+  250  ls -la
+  251  ls
+  252  ls -la
+  253  cd ..
+  254  ls
+  255  date
+  256  cat cronlog 
+  257  ls
+  258  cd 2015-01-07/
+  259  ls
+  260  ls -la
+  261  ls
+  262  ls -la
+  263  tail -f nmea_USB0.txt 
+  264  ls'
+  265  cp nmea_USB0.txt sample_gps.txt
+  266  emacs -nw sample_gps.txt 
+  267  ls
+  268  cat sample_gps.txt | grep RMC | tail -1 
+  269  cat sample_gps.txt | grep ^\$GPRMC | tail -1 
+  270  cd ..
+  271  cat 2015-01-07/sample_gps.txt | grep ^\$GPRMC | tail -1 
+  272  ls
+  273  cat cat_nmea_usb.py -
+  274  emacs -nw set_unix_time_from_gps.py
+  275  ls
+  276  cat cat_nmea_usb.py 
+  277  fg
+  278  ls
+  279  cat cat_nmea_usb.py >> set_unix_time_from_gps.py 
+  280  chmod +x set_unix_time_from_gps.py 
+  281  fg
+  282  cd
+  283  ls
+  284  cd seatop-python/
+  285  ls
+  286  date
+  287  ./set_unix_time_from_gps.py
+  288  ./set_unix_time_from_gps.py 0
+  289  ls
+  290  crontab -e 
+  291  ls
+  292  emacs -nw reboot.sh 
+  293  ls
+  294  fg
+  295  ls
+  296  fg
+  297  ls
+  298  cd
+  299  jobs
+  300  ps fauxwww
+  301  ls
+  302  ~/seatop-python/reboot.sh
+  303  ls
+  304  cd seatop-python/
+  305  ls
+  306  cd 2015-03-01/
+  307  ls
+  308  ls -la'
+  309  ls -la
+  310  cd ..
+  311  ls
+  312  sudo emacs -nw reboot.she
+  313  sudo emacs -nw reboot.sh
+  314  sudo shutdown -h now
+  315  date
+  316  watch -n 1 date
+  317  ls
+  318  cd seatop-2015-03-01/
+  319  ls
+  320  tail -f * 
+  321  ls -la
+  322  tail -f * 
+  323  ls
+  324  ps fauxwww
+  325  ls
+  326  cd seatop-python/
+  327  ls
+  328  cd
+  329  ~/seatop-python/reboot.sh
+  330  ls
+  331  date
+  332  crontab -e
+  333  sudo shutdown -h now
+  334  uptime
+  335  date
+  336  cat >> ~/.ssh/authorized_keys
+  337  ssh-keygen 
+  338  ls -l ~/.ssh/
+  339  chmod 640 ~/.ssh/authorized_keys 
+  340  cat ~/.ssh/authorized_keys 
+  341  history |less
+  342  ls
+  343  sudo updatedb
+  344  locate
+  345  sudo apt-get update
+  346  sudo apt-get upgrade
+  347  cd
+  348  ls
+  349  crontab -e
+  350  ls /home/pi/seatop-console/cron_reboot.sh
+  351  ls
+  352  sudo apt-get install git
+  353  curl jonx.org/ip.php
+  354  cat ~/.ssh/id_rsa.pub 
+  355  ls
+  356  git clone git@github.com:ntbrock/seatop-console.git
+  357  ls
+  358  mkdir OFF
+  359  mv seatop-console OFF
+  360  ls
+  361  mv seatop-2015-03-01/
+  362  mv seatop-2015-03-01/ OFF/
+  363  history 
+  364  ls
+  365  cd seatop-python/
+  366  ls
+  367  cd ..
+  368  mv seatop-python OFF/
+  369  mv OFF/seatop-console .
+  370  cd seatop-console/
+  371  ls
+  372  cd ..
+  373  crontab -l
+  374  ls /home/pi/seatop-console/cron_reboot.sh
+  375  ls
+  376  fg
+  377  ls
+  378  cd seatop-console/
+  379  ls
+  380  ls -la
+  381  ls
+  382  cd ..
+  383  ls
+  384  cd seatop-console/
+  385  ls
+  386  cd raspberrypi/
+  387  ls
+  388  mkdir history
+  389  cd history/
+  390  history > pi_history
