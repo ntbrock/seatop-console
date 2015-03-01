@@ -3,11 +3,16 @@
 # set_unix_time from Gps - SeaTop
 # 2015-Mar-01 Brockman - Set the pi date via a sudo date command by finding the first GPS RMC sentence off a configurable usb tty
 
-
 import serial
 import sys
 import re
 from subprocess import call
+import signal, os
+
+# Set the signal handler and a 30-second alarm
+# signal.signal(signal.SIGALRM, handler)
+signal.alarm(30)
+
 
 if len(sys.argv) < 2:
   print "Usage: set_unix_time_from_gps.py USBtty<n> (0 is usually GPS, 1 is NX2)"

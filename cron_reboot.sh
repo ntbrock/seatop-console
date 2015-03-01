@@ -32,7 +32,25 @@ mkdir -p $DATEDIR
 ### Start the listener
 
 $BASEDIR/cat_nmea_usb.py ${GPS_USB} >> $DATEDIR/nmea_USB${GPS_USB}-gps.txt &
+GPS_PID=$!
+echo $GPS_PID > ${HOME}/gps.pid
+
+sleep 2
+
 $BASEDIR/cat_nmea_usb.py ${NX2_USB} >> $DATEDIR/nmea_USB${NX2_USB}-nx2.txt & 
+NX2_PID=$!
+echo $NX2_PID > ${HOME}/nx2.pid
+
+sleep 2
+
+
+# Create some symlinks
+rm -f ${HOME}/nmea_USB${GPS_USB}-gps.txt
+rm -f ${HOME}/nmea_USB${NX2_USB}-nx2.txt
+
+ln -s $DATEDIR/nmea_USB${GPS_USB}-gps.txt ${HOME}/nmea_USB${GPS_USB}-gps.txt
+ln -s $DATEDIR/nmea_USB${NX2_USB}-nx2.txt ${HOME}/nmea_USB${NX2_USB}-nx2.txt
+
 
 #$BASEDIR/cat_nmea_usb.py 2 >> $DATEDIR/nmea_USB2.txt & 
 #$BASEDIR/cat_nmea_usb.py 3 >> $DATEDIR/nmea_USB3.txt & 
