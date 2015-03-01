@@ -1,0 +1,22 @@
+HOWTO Set the raspberry's unix clock from GPS satellite time
+
+  Sentence = $GP RMC
+
+  0 = RMC
+  1 = This is UTC Time in format :  HHMMSS.MMM
+  2 = Active or Void
+  3 = Latitude
+  4 = Longitude 
+  5 = SOG
+  6 = COG
+  7 = DATE - DDMMYY   ex 010315
+  8 = Magnetic Variation
+  9 = Checksum data
+
+
+
+
+
+Idea - seatop put a meta beacon into each file at the same time?
+This would helop with alignment
+

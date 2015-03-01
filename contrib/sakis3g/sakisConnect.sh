@@ -1,0 +1,4 @@
+#!/bin/sh
+
+./sakis3g OTHER="USBMODEM" USBMODEM="0424:9514" APN_USERNAME=" " APN_PASSWORD=" " connect
+

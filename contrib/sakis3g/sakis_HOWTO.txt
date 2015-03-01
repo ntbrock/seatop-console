@@ -1,0 +1,25 @@
+root@illyra-gw:~/install# ./sakis3g status
+MF591 connected to T-Mobile (310260).
+root@illyra-gw:~/install# 
+root@illyra-gw:~/install# ./sakis3g info
+Connection Information
+ 
+Interface: P-t-P (ppp0)
+ 
+Connected since: 2014-09-28 20:05
+Kilobytes received: 16331
+Kilobytes sent: 2418
+
+Network ID: 310260
+Operator name: T-Mobile
+APN: epc.tmobile.com
+ 
+Modem: MF591
+Modem type: USB
+Kernel driver: cdc_acm
+Device: /dev/ttyACM0
+ 
+IP Address: 33.107.54.147
+Subnet Mask: 255.255.255.255
+Peer IP Address: 10.0.0.1
+Default route(s): 10.0.0.1
