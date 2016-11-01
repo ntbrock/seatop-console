@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python -u
 # 2015-Mar-01 - Upgrade to support SIGHUP to insert the current unix time into the NMEA stream as a meta line
 
 #http://raspberrypi.stackexchange.com/questions/13930/capturing-serial-number-of-2-usb-rfid-reader-in-python-pi2-rfid-mifire-rfid
