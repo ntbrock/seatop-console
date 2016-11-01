@@ -13,7 +13,7 @@ export NX2_USB=1
 
 
 #----------------------------------------------------------
-sleep 20 # wait for usb devices to come online
+sleep 60 # wait for usb devices to come online
 
 export BASEDIR=/home/pi/seatop-console/seatop-python
 

@@ -2,6 +2,7 @@
 
 # set_unix_time from Gps - SeaTop
 # 2015-Mar-01 Brockman - Set the pi date via a sudo date command by finding the first GPS RMC sentence off a configurable usb tty
+# 2015-Mar-05 Brockman - Added support for previous 24 hours of lemons gps with sentence: $GPZDA,025058.000,04,03,2015,00,00*5D
 
 import serial
 import sys
@@ -63,13 +64,36 @@ while attempt < maxAttempts:
           dateStr = "{0}-{1}-{2}".format(date_YY, date_MM, date_DD)
           fullStr = "{0} {1}".format(dateStr, utcTimeStr)
 
-          print "Date Set: {0}    UTC Time: {1}   Date: {2}".format(fullStr, utcTimeStr, dateStr)
+          # execute the system date command
+          print "GPRMC Date Set: {0}    UTC Time: {1}   Date: {2}".format(fullStr, utcTimeStr, dateStr)
           call(["sudo", "date", "-u", "-s", "{0}".format(fullStr), "+%F %T"])
 
+          # finish execution
+          ser.close()
+          sys.exit(0)
 
+
+        # 2015-Mar-05 New sentence from lemons gps: $GPZDA,025058.000,04,03,2015,00,00*5D
+        # Parse the line via simple regex to minimize library dependency
+        # pardon the Y2100K bug ;) See you in heaven
+        m = re.search('^\$GPZDA,([0-9]{2})([0-9]{2})([0-9]{2})[.0-9]{3},([0-9]{2}),([0-9]{2}),20([0-9]{2}),', response)
+        if m:
+
+          utc_HH = m.group(1)
+          utc_MM = m.group(2)
+          utc_SS = m.group(3)
+
+          date_DD = m.group(4)
+          date_MM = m.group(5)
+          date_YY = m.group(6)
+
+          utcTimeStr = "{0}:{1}:{2}".format(utc_HH, utc_MM, utc_SS)
+          dateStr = "{0}-{1}-{2}".format(date_YY, date_MM, date_DD)
+          fullStr = "{0} {1}".format(dateStr, utcTimeStr)
 
           # execute the system date command
-
+          print "GPZDA Date Set: {0}    UTC Time: {1}   Date: {2}".format(fullStr, utcTimeStr, dateStr)
+          call(["sudo", "date", "-u", "-s", "{0}".format(fullStr), "+%F %T"])
 
           # finish execution
           ser.close()

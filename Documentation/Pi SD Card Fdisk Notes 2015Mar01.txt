@@ -1,0 +1,445 @@
+
+===============
+
+Best is to pre-record sayings using google voice.
+
+#!/bin/bash
+say() { local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "http://translate.google.com/translate_tts?tl=en&q=$*"; }
+say $*
+
+---
+
+http://translate.google.com/translate_tts?tl=en&q=True%20Wind%20Speed%20Lower%20in%20Past%205%20Minutes
+
+
+sudo apt-get install alsa-utils
+
+
+http://elinux.org/RPi_Text_to_Speech_%28Speech_Synthesis%29#Pico_Text_to_Speech
+
+sudo apt-get install libttspico-utils
+pico2wave -w lookdave.wav "Look Dave, I can see you're really upset about this." && aplay lookdave.wav
+
+
+sudo apt-get install espeak
+Test Espeak with: English female voice, emphasis on capitals (-k), speaking slowly (-s) using direct text:-
+ espeak -ven+f3 -k5 -s150 "I've just picked up a fault in the AE35 unit"
+
+
+
+--------------------------------
+dd: /dev/disk2: Resource busy
+634+0 records in
+634+0 records out
+5318377472 bytes transferred in 1831.164842 secs (2904368 bytes/sec)
+air-brockman-2013:seatop-backup brockman$ ls -lah
+
+
+conv=noerror,
+
+
+
+dd: /dev/disk2: Resource busy
+5077+0 records in
+5077+0 records out
+5323620352 bytes transferred in 1816.279352 secs (2931058 bytes/sec)
+air-brockman-2013:seatop-backup brockman$ 
+
+
+$ sudo dd bs=1m of=2015-03-01-seatop-raspbian-wheezy.img if=/dev/rdisk2 seek=5077 skip=5077 conv=notrunc
+
+$ sudo dd bs=1m of=2015-03-01-seatop-raspbian-wheezy.img if=/dev/rdisk2 conv=notrunc,noerror
+
+
+dd: /dev/rdisk2: Resource busy
+5077+0 records in
+5077+0 records out
+5323620352 bytes transferred in 266.829478 secs (19951395 bytes/sec)
+dd: /dev/rdisk
+
+1048576
+
+= 1024*1024
+
+
+5323620352 bytes transferred in 334.393384 secs (15920232 bytes/sec)
+dd: /dev/rdisk2: Resource busy
+7457+0 records in
+7457+0 records out
+7819231232 bytes transferred in 442.513930 secs (17670023 bytes/sec)
+
+
+
+---------------
+
+7746879488 Mar  1 17:51 CHECK_2015-03-01-seatop-raspbian-wheezy.img
+-rw-r--r--  1 brockman  staff  5323620352 Mar  1 17:57 BAD_2015-03-01-seatop-raspbian-wheezy.img
+-rw-r--r--  1 brockman  staff         473 Mar  1 20:46 HOWTO.txt
+-rw-r--r--  1 brockman  staff  7819231232 Mar  1 20:53 RECOVERED_2015-03-01-seatop-raspbian-wheezy.img
+-rw-r--r--  1 brockman  staff  7819231232
+
+======
+21:40 -working w bad micro sd card
+
+
+PINK BROKEN card:
+                                Unlocked Encrypted
+/dev/disk2
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:     FDisk_partition_scheme                        *7.7 GB     disk2
+   1:             Windows_FAT_32 boot                    58.7 MB    disk2s1
+   2:                      Linux                         7.7 GB     disk2s2
+
+Disk: /dev/disk2	geometry: 941/255/63 [15130624 sectors]
+Signature: 0xAA55
+         Starting       Ending
+ #: id  cyl  hd sec -  cyl  hd sec [     start -       size]
+------------------------------------------------------------------------
+ 1: 0C    0 130   3 -    7 165  30 [      8192 -     114688] Win95 FAT32L
+ 2: 83  896   0   1 -  127   3  16 [    122880 -   15155200] Linux files*
+ 3: 00    0   0   0 -    0   0   0 [         0 -          0] unused      
+ 4: 00    0   0   0 -    0   0   0 [         0 -          0] unused      
+air-brockman-2013:seatop-backup brockman$ 
+
+
+PINK - 7746879488 =   
+
+       7746879488 = File size.
+
+
+Black - 7819231232 = 
+
+        7819231232 = 15271936 Bytes Difference - Need to shink pink by this amount.
+
+
+Working Card:
+
+/dev/disk2
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:     FDisk_partition_scheme                        *7.8 GB     disk2
+   1:             Windows_FAT_32 boot                    58.7 MB    disk2s1
+   2:                      Linux                         7.8 GB     disk2s2
+
+
+air-brockman-2013:seatop-backup brockman$ sudo fdisk /dev/disk2
+Password:
+Disk: /dev/disk2	geometry: 951/255/63 [15278080 sectors]
+Signature: 0xAA55
+         Starting       Ending
+ #: id  cyl  hd sec -  cyl  hd sec [     start -       size]
+------------------------------------------------------------------------
+ 1: 0C    0 130   3 -    7 165  30 [      8192 -     114688] Win95 FAT32L
+ 2: 83  896   0   1 -  127   3  16 [    122880 -   15155200] Linux files*
+ 3: 00    0   0   0 -    0   0   0 [         0 -          0] unused      
+ 4: 00    0   0   0 -    0   0   0 [         0 -          0] unused  
+
+
+On Pi - 
+
+sudo fdisk /dev/mmcblk0
+
+7822MB 7822376960 bytes
+4 heads, 16 sectors / track, 238720 cylendors, 15278080 total sectors
+sector size = 512 bytes
+
+/dev/mmcblk0p1    Start = 8192    End = 122879   Blocks = 57344   ID = C   W95 Fat32 (LBA)
+
+/dev/mmcblk0p2    Start = 122880  End = 15278079  Blocks = 7577600  Id = 83  Linux
+
+
+-----------------
+Pink Chip
+
+mmcblk0: mmc0:1234 SA08G 7.21GiB
+ mmcblk0: p1 p2
+ p2 size 15155200 extends beyond EOD, truncated
+
+ EXT4-fs ( mmcblk0p2 ) : bad geometry: block count 1894400 exceeds size of device ( 1875968 blocks )
+
+
+
+======================
+22:02 - Learning GPT on pink disk 
+
+waste of time, but kind of fun. Beacuse i haven't done it before!
+
+air-brockman-2013:~ brockman$ sudo gpt show /dev/disk2
+     start      size  index  contents
+         0         1         MBR
+         1      8191         
+      8192    114688      1  MBR part 12
+    122880  15155200      2  MBR part 131   <--- THIS overlaps the end of the disk.
+
+
+    partiiton is 18432 blocks over.
+
+    ( math:  EXT4-fs bad geometry, Block count 1894400 exceeds size of device 1875968 blocks )
+
+ Pink disk is smaller than black disk, by 18432 blocks,  aka 9437184 bytes. or approx 10 megs.
+
+hopefull there is no data at the end of the big disk partition, so we could just truncate teh partition table.
+
+let's look in the file.
+
+
+PINK = 7746879488   aka  14776 blocks
+BLACK= 7819231232 
+
+ diff=   72351744
+
+ diff=        276 blocks (512 mb) 
+
+
+
+
+---- 
+Checking end of file:
+
+air-brockman-2013:seatop-backup brockman$ dd bs=512k skip=14776 if=2015-03-01-seatop-raspbian-wheezy.img of=END_OF_FILE.img
+
+
+$ hexdump END_OF_FILE.img 
+0000000 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+*
+4500000
+
+-----
+
+Let's master gpt
+
+$ sudo gpt -r show -l /dev/disk2
+
+http://theducks.org/2010/12/fixing-gpt-partition-tables-for-osx/
+
+http://www.rodsbooks.com/gdisk/
+
+
+$ sudo gdisk /dev/disk2
+GPT fdisk (gdisk) version 0.8.10
+
+Warning: Devices opened with shared lock will not have their
+partition table automatically reloaded!
+Partition table scan:
+  MBR: MBR only
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+
+***************************************************************
+Found invalid GPT and valid MBR; converting MBR to GPT format
+in memory. THIS OPERATION IS POTENTIALLY DESTRUCTIVE! Exit by
+typing 'q' if you don't want to convert your MBR partitions
+to GPT format!
+***************************************************************
+
+
+Warning! Secondary partition table overlaps the last partition by
+33 blocks!
+You will need to delete this partition or resize it in another utility.
+
+
+
+http://www.macworld.com/article/1055274/marchgeekfactor.html
+
+15271936 Bytes Difference - Need to shink pink by this amount.
+
+OLD size = 15155200  * 512  = 7757926400   -  15271936 = 7742654464
+
+NEW size = 15122372  * 512  = 7742654464
+
+Block diff =  32828 blocks shorter. == 16807936
+
+
+New Block Len = 15122372 in partition table
+
+
+
+BLACK>Disk: /dev/disk2	geometry: 951/255/63 [15278080 sectors]
+PINK> Disk: /dev/disk2	geometry: 941/255/63 [15130624 sectors]
+diff =                                          147456 sectors
+
+
+Black size - phs diff
+15155200 - 147456     = 15007744 Blocks = 
+
+
+--2235------ Pink Disk
+
+gdisk expert mode
+
+Expert command (? for help): i
+Partition number (1-2): 2
+Partition GUID code: 0FC63DAF-8483-4772-8E79-3D69D8477DE4 (Linux filesystem)
+Partition unique GUID: E42F0E9C-DD9C-4872-A1A9-1DDB144B65D7
+First sector: 122880 (at 60.0 MiB)
+Last sector: 15278079 (at 7.3 GiB)
+Partition size: 15155200 sectors (7.2 GiB)
+Attribute flags: 0000000000000000
+Partition name: 'Linux filesystem'
+
+Recovery/transformation command (? for help): p
+Disk /dev/disk2: 15278080 sectors, 7.3 GiB
+Logical sector size: 512 bytes
+Disk identifier (GUID): 7FF2738E-01F5-4FB5-98DA-3DBDA56D66EA
+Partition table holds up to 128 entries
+First usable sector is 34, last usable sector is 15278046
+Partitions will be aligned on 2048-sector boundaries
+Total free space is 8158 sectors (4.0 MiB)
+
+Number  Start (sector)    End (sector)  Size       Code  Name
+   1            8192          122879   56.0 MiB    0700  Microsoft basic data
+   2          122880        15278079   7.2 GiB     8300  Linux filesystem
+
+
+-----------------------
+
+After destroying says:
+
+Expert command (? for help): p
+Disk /dev/disk2: 15278080 sectors, 7.3 GiB
+Logical sector size: 512 bytes
+Disk identifier (GUID): C29EAF1B-E682-4845-A753-84025464052E
+Partition table holds up to 128 entries
+First usable sector is 34, last usable sector is 15278046
+Partitions will be aligned on 2048-sector boundaries
+Total free space is 8158 sectors (4.0 MiB)
+
+Number  Start (sector)    End (sector)  Size       Code  Name
+   1            8192          122879   56.0 MiB    0700  Microsoft basic data
+   2          122880        15278046   7.2 GiB     8300  Linux
+
+
+
+---2250----
+Convert back to MBR,
+
+Expert command (? for help): r
+
+Recovery/transformation command (? for help): ?
+b	use backup GPT header (rebuilding main)
+c	load backup partition table from disk (rebuilding main)
+d	use main GPT header (rebuilding backup)
+e	load main partition table from disk (rebuilding backup)
+f	load MBR and build fresh GPT from it
+g	convert GPT into MBR and exit
+h	make hybrid MBR
+i	show detailed information on a partition
+l	load partition data from a backup file
+m	return to main menu
+o	print protective MBR data
+p	print the partition table
+q	quit without saving changes
+t	transform BSD disklabel partition
+v	verify disk
+w	write table to disk and exit
+x	extra functionality (experts only)
+?	print this menu
+
+Recovery/transformation command (? for help): g
+
+MBR command (? for help): ?
+a	toggle the active/boot flag
+c	recompute all CHS values
+l	set partition as logical
+o	omit partition
+p	print the MBR partition table
+q	quit without saving changes
+r	set partition as primary
+s	sort MBR partitions
+t	change partition type code
+w	write the MBR partition table to disk and exit
+
+MBR command (? for help): p
+
+** NOTE: Partition numbers do NOT indicate final primary/logical status,
+** unlike in most MBR partitioning tools!
+
+** Extended partitions are not displayed, but will be generated as required.
+
+Disk size is 15278080 sectors (7.3 GiB)
+MBR disk identifier: 0x00000000
+MBR partitions:
+
+                                                   Can Be   Can Be
+Number  Boot  Start Sector   End Sector   Status   Logical  Primary   Code
+   1                  8192       122879   primary     Y        Y      0x07
+   2                122880     15278046   primary              Y      0x83
+
+MBR command (? for help): w
+
+Converted 2 partitions. Finalize and exit? (Y/N): Y
+Warning: Devices opened with shared lock will not have their
+partition table automatically reloaded!
+Warning: The kernel may continue to use old or deleted partitions.
+You should reboot or remove the drive.
+GPT data structures destroyed! You may now partition the disk using fdisk or
+other utilities.
+Warning: Devices opened with shared lock will not have their
+partition table automatically reloaded!
+air-brockman-2013:seatop-backup brockman$ 
+air-brockman-2013:seatop-backup brockman$ 
+
+
+
+Restore the first part of the disk:
+$ sudo dd if=2015-03-01-seatop-raspbian-wheezy.img of=/dev/disk2 bs=512 count=128 conv=noerror,notrunc
+
+^^^ This corrected the boot! sweet.
+
+
+/dev/disk2
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:     FDisk_partition_scheme                        *7.8 GB     disk2
+   1:             Windows_FAT_32 boot                    58.7 MB    disk2s1
+   2:                      Linux                         7.8 GB     disk2s2
+
+
+
+$ sudo fdisk -d /dev/disk2 
+8192,114688,0x0C,-,0,130,3,7,165,30
+122880,15155200,0x83,-,896,0,1,127,3,16
+0,0,0x00,-,0,0,0,0,0,0
+0,0,0x00,-,0,0,0,0,0,0
+
+
+Editing the file by hand to restore it. mwmhahaha
+
+
+
+Warning! Secondary partition table overlaps the last partition by
+147489 blocks!
+
+
+---2322: ------
+
+Used the gdisk to go into the MBR mode, set the active boot flag on partition #1.
+deleted #2, re-created it linux styl
+
+
+air-brockman-2013:seatop-backup brockman$ sudo fdisk /dev/disk2
+Disk: /dev/disk2	geometry: 941/255/63 [15130624 sectors]
+Signature: 0xAA55
+         Starting       Ending
+ #: id  cyl  hd sec -  cyl  hd sec [     start -       size]
+------------------------------------------------------------------------
+*1: 07    0 130   3 -    7 165  30 [      8192 -     114688] HPFS/QNX/AUX
+ 2: 83    7 165  31 -  941 213   7 [    122880 -   15007711] Linux files*
+ 3: 00    0   0   0 -    0   0   0 [         0 -          0] unused      
+ 4: 00    0   0   0 -    0   0   0 [         0 -          0] unused     
+
+
+
+
+Bad Geometry, nothing really to do with parttiion sizes.
+
+
+
+----------
+Linux Magic
+e2fsck -f /dev/sdb2
+resize2fs /dev/sdb2
+
+The filesystem on /dev/sdb2 is now 1875968 blcoks long
+
+
