@@ -1,0 +1,26 @@
+.axis-group text{
+    font: 10px sans-serif;
+}
+svg.clock text{
+    font: 15px sans-serif !important;
+    fill: grey;
+}
+.axis-group line.minor,
+circle.outside-circle{
+	stroke-dasharray: none;
+}
+circle.mark, rect.mark, path.mark{
+    fill-opacity: 0.7;
+}
+/*circle.mark:hover, rect.mark:hover, path.mark:hover{*/
+    /*fill: orangered !important;*/
+    /*stroke: orangered !important;*/
+    /*fill-opacity: 1;*/
+/*}*/
+.line-plot path.mark:hover{
+	fill: none !important;
+}
+
+div{
+    float: left;
+}

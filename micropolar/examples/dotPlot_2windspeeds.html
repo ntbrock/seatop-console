@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>example dotPlot</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type='text/javascript' src="http://d3js.org/d3.v3.min.js"></script>
+<!--   <script type='text/javascript' src="http://micropolar.org/micropolar-v0.2.2.js"></script> -->
+
+  <script type="text/javascript" src="../micropolar-v0.2.2.js"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+
+  <h1>dotPlot</h1>
+
+  <div class="example-container">
+  </div>
+
+
+<script>
+  var symbols = [ "cross", "triangle-down", "triangle-up" ]
+
+  var twa = [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [ 80, 64, 77, 88 ],
+    [ 57, 66, 79, 90 ]
+  ]
+
+  var bsp = [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [ 7.1, 7.2, 7.3, 7.4 ],
+    [ 7.2, 7.3, 7.4, 7.6 ]
+  ]
+
+  function align(e,i) { 
+    console.log("dotPlot:47> aligning e: " + e + " to: " + (e-90))
+    return e-90;
+  }
+
+ // var t = twa;
+
+
+
+var configs = [
+    
+    {data: [
+             {t: $.map(twa[6], align), r: bsp[6], geometry: µ.DOT, name: 'TWS 6 BSP',  dotSize: 35, opacity: 0.8},
+             {t: $.map(twa[7], align), r: bsp[7], geometry: µ.DOT, name: 'TWS 7 BSP',  dotSize: 35, opacity: 0.8}
+           ],
+          layout: {title: 'J120 Polars', margin: {top: 0, bottom: 0, left: 5, right: 10}, angularAxis: {visible: false}, radialAxis: {visible: false}}}
+    
+            
+];
+
+configs.forEach(function(_config){
+    var config = {layout: {width: 600, height: 600}};
+    µ.util.deepExtend(config, _config);
+    console.log(JSON.stringify(µ.adapter.plotly().convert(config, true)));
+    micropolar.Axis().config(config).render(d3.select('body').append('div'));
+});
+
+</script>
+
+
+</body>
+</html>
