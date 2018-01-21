@@ -1,0 +1,1 @@
+iwlist scan|less

@@ -1,0 +1,18 @@
+Kplex - http://www.stripydog.com/kplex/
+
+Socat - http://www.dest-unreach.org/socat/
+
+Joachim forums - https://groups.google.com/forum/#!topic/kplex/4cF8xk4HCB4
+
+$PSILFDX,,R), it switches to FDX mode, which is binary data on 115200 or 19200 bauds,
+
+
+Thanks,
+
+For my own and others' reference, here is what I have found so far. The nexus server starts with nmea in 4800 bauds, and if it receives a special sentence ( $PSILFDX,,R), it switches to FDX mode, which is binary data on 115200 or 19200 bauds, not sure before I have tested). There is a box you can buy which does exactly that, plus logs the binary stream to logfiles in increments such as RaceAAA.nxb, RaceAAB.nxb etc. These files can be read by the Nexus software, and you can create polar diagrams that are used to output target boat speeds etc. I don't mind another box, but since I already have a computer on board (RPi with Kplex) I thought it would be a good challenge to include this in the setup. 
+
+What I might do if I have enough time, is to pass the data through  a patch USB cable to the GPIO serial and log the incoming binary data to the file. If I have the computer with the software, there would be no data to log, but otherwise, I would be logging and populating data for the software to make the polars, and ultimately have the RPi output the target boat speed to the system.
+
+So what is left to figure out is automatic numbering of log files, interpolating polar data and outputting this to the system, as well as initiating the FDX protocol and logging binary data. Everything looks simple when you have no clue what you are doing...
+
+Joachim
