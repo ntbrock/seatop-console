@@ -1,5 +1,22 @@
 #!/usr/bin/env python
+
+# Simple NMEA generator that posts via tcp to localhost kplex
+# for use in determining how the nexus will handle the 
  
+
+## In Nexus Server, to override the nx2 log and instead use nmea log, set C73 = off
+
+# From NX2 Control Manual: http://static.garmin.com/pumac/NX2-Multi-contol-eng.pdf
+# 12.6.4 C73 (OFF BSP)
+# (OFF) = NX2 log transducer. (On) = NMEA log transducer.
+# If you want to use a NMEA transducer (connected to the NMEA input, you have to set
+# C73 to On. The Server will then transmit this information on the Nexus Network to all
+# connected instruments.
+# After you have changed this setting, you have to restart the system 
+
+
+
+
 import socket
 import time
  
@@ -52,11 +69,10 @@ s.connect((TCP_IP, TCP_PORT))
 for hdt in range(360):
  
   hdtp = format(hdt, "03d")
-  o = 100
+  hdmp = format(hdt+7, "03d")
+  bsp = format(hdt/10, "0.2f") 
  
-  MESSAGE = "IIVHW,"+hdtp+",T,331,M,02.22,N,03.33,K*00"
-
-#  MESSAGE = f"IIVHW,{hdtp},T,331,M,02.22,N,03.33,K*00"
+  MESSAGE = "IIVHW,"+hdtp+",T,"+hdmp+",M,11.11,N,"+bsp+",K*00"
 
   data,cksum,calc_cksum = checksum(MESSAGE)
   last2 = calc_cksum[-2:]
@@ -66,6 +82,33 @@ for hdt in range(360):
 # s.send(MESSAGE.encode())
 
   print("sent data: "+data+"*"+last2+" cksum: "+cksum+" calc_cksum: "+calc_cksum+"\r\n")
+
+  ## Message 1 - temperature
+
+  MESSAGE1 = f"IIMTW,20,C*00"
+  data1,cksum1,calc_cksum1 = checksum(MESSAGE1)
+  last21 = calc_cksum1[-2:]
+  s.send(("$"+data1+"\r\n").encode())
+  print(f"sent msg1: {data1} cksum: {cksum1} calc_cksum: {calc_cksum1}\r\n")
+
+
+
+
+  ## Message 2 - Custom target speed
+
+  MESSAGE2 = f"PSILTBS,{bsp},N*00"
+  data2,cksum2,calc_cksum2 = checksum(MESSAGE2)
+  last22 = calc_cksum2[-2:]
+  s.send(("$"+data2+"*"+last22+"\r\n").encode())
+  print(f"sent msg2: {data2}*{last22} cksum: {cksum2} calc_cksum: {calc_cksum2}\r\n")
+
+  ## Message 3 - Custom Angles
+
+  MESSAGE3 = f"PSILCD1,{hdtp}.4,{hdtp}.6,*00"
+  data3,cksum3,calc_cksum3 = checksum(MESSAGE3)
+  last23 = calc_cksum3[-2:]
+  s.send(("$"+data3+"*"+last23+"\r\n").encode())
+  print(f"sent msg3: {data3}*{last23} cksum: {cksum3} calc_cksum: {calc_cksum3}\r\n")
 
   time.sleep(1) 
 
