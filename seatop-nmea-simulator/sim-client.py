@@ -52,8 +52,11 @@ s.connect((TCP_IP, TCP_PORT))
 for hdt in range(360):
  
   hdtp = format(hdt, "03d")
+  o = 100
  
-  MESSAGE = f"IIVHW,{hdtp},T,331,M,02.22,N,03.33,K*00"
+  MESSAGE = "IIVHW,"+hdtp+",T,331,M,02.22,N,03.33,K*00"
+
+#  MESSAGE = f"IIVHW,{hdtp},T,331,M,02.22,N,03.33,K*00"
 
   data,cksum,calc_cksum = checksum(MESSAGE)
   last2 = calc_cksum[-2:]
@@ -62,7 +65,7 @@ for hdt in range(360):
 
 # s.send(MESSAGE.encode())
 
-  print(f"sent data: {data}*{last2} cksum: {cksum} calc_cksum: {calc_cksum}\r\n")
+  print("sent data: "+data+"*"+last2+" cksum: "+cksum+" calc_cksum: "+calc_cksum+"\r\n")
 
   time.sleep(1) 
 
