@@ -1,0 +1,108 @@
+2018Dec09
+
+My session this coming Sunday:
+
+- Wire this air laptop -> rs232, receieve data to local kplex, visualize with Polar Navy
+	(The air is the temporary pi)
+	Position from seatalkNG
+	Depth, hdm , hdt from Nexus
+
+- Send navigation commands from PolarView -> kplex -> back to nexus, see those displayed on instruments.
+	Nx2 display at nav station should show target
+
+- Run the simulator python on the laptop , transmit three sentences through kplex to the nexus.
+	\c:1544396165*53\$IIVHW,359,T,366,M,11.11,N,35.90,K*56
+	\c:1544396165*53\$PSILTBS,35.90,N*2c
+	\c:1544396165*53\$PSILCD1,359.4,359.6,*1e
+
+- Test: Does Sea temperature display?   68F
+
+- Reconfigure C73 to get Nexus to display simulated BSP from Air python
+	Should see bsp count up, while the HDM / HDT remain from nx2 fluxgate
+
+ -Test: Does the simulated boatspeed display?   Do real or simualated HDM/HDT show?
+
+- Do the special functions to show the target speed / angles on the nx2 displays
+	Enticing!!!
+
+- Change c73 back to get the paddlewheel log.
+
+- Wire the 12V -> 5V pi power inline with the instrument circuit
+	Attach at switch or at Nx2 server?
+	Figure out mounting arrangement / case / brackets
+	In case:
+		Pi2/3
+		12v->5v buck converter
+		rs232 hat
+	Cables out of case
+		rs232 to nx2 server
+		power cable
+		usb extension for Wifi dongle? (to place strategically)
+		Optional: Display cable?
+
+	Any room or desire for a Pi screen on the instrumnet panel?
+		Might be super cool
+
+
+- Try the pi rs232 shield (if it arrives)
+	Turn off gpio boot up
+	Follow the howto's on product websites,  wiring + rpi config + /etc changes
+
+- Pi bootup sequence , (on instrument circuit), with kplex, auto registering the rs232 via gpio.  Auto log to filesystem.
+	
+- Note, the final design in January will use RTC onboard rpi
+
+- Make the decision to purchase the sonic speedo w/ temp NOW, or wait until future when the old one fails.
+
+
+
+
+GPS receiver:
+
+  Product ID:	0x2303
+  Vendor ID:	0x067b  (Prolific Technology, Inc.)
+  Version:	4.00
+  Speed:	Up to 12 Mb/sec
+  Manufacturer:	Prolific Technology Inc. 
+  Location ID:	0x14200000 / 9
+  Current Available (mA):	500
+  Current Required (mA):	100
+  Extra Operating Current (mA):	0
+
+
+  
+
+  Note b: Make sure the calibration codes C73, C74, C75 and C76 (See Multi Control
+Manual) for NMEA transducers are correctly set. 
+
+
+
+12.6.4 C73 (OFF BSP)
+(OFF) = NX2 log transducer. (On) = NMEA log transducer.
+If you want to use a NMEA transducer (connected to the NMEA input, you have to set
+C73 to On. The Server will then transmit this information on the Nexus Network to all
+connected instruments.
+After you have changed this setting, you have to restart the system 
+
+
+
+
+2.11 Special NMEA sentences
+The Server can read 2 special NMEA sentences which can be send from a PC.
+One contains TBS (target boat speed), the other CAD (customised angle data )
+and CFD (customised fixpoint data ). These 3 data are retransmitted on the
+Nexus Network and can be displayed as a sub-function on the Multi Control
+instrument.
+To get the sub-function TBS, select main function SPEED and the ”empty” subfunction.Then press PAGE and SET together followed by CLEAR.
+To get the sub-function CAD, select main function NAVIGATE and the ”empty”
+sub-function.Then press PAGE and SET together followed by CLEAR.
+To get the sub-function CFD, select main function WIND and the ”empty” subfunction.Then press PAGE and SET together followed by CLEAR. 
+
+Sample TransmitS:
+
+\c:1544395831*58\$IIVHW,026,T,033,M,11.11,N,2.60,K*65
+\c:1544395831*58\$PSILTBS,2.60,N*17
+\c:1544395831*58\$PSILCD1,026.4,026.6,*1e
+
+
+
